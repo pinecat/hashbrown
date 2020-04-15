@@ -24,6 +24,7 @@ install: hashbrown.h libhashbrown.a
 
 uninstall:
 	rm -f $(MANDIR)/hashbrown.3
+	rm -f $(MANDIR)/hashbrown.3.gz
 	rm -f $(HINSTDIR)/hashbrown.h
 	rm -f $(AINSTDIR)/libhashbrown.a
 
