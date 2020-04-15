@@ -32,6 +32,13 @@ You can clean the directory using `make clean`.  This will remove the build dire
 
 You can uninstall the library using `make uninstall`.
 
+## Docs
+The `install` target in the Makefile will also install manpages for the library.  You can give them a peep with:
+
+```sh
+$ man 3 hashbrown
+```
+
 ## Using The Library In Your Own Code
 Any code you want to use this library with, you'll have to specify it explicitly in your compiler options.  You will also have to link the library similarly to how you'd link the math library. You can use the `-I` and `-L` options to specify the location of these library files like so:
 
