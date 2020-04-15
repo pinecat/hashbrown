@@ -16,7 +16,7 @@ Hashbrown has no external dependencies.  To compile and install the code, simply
 
 ```sh
 $ git clone https://github.com/pinecat/hashbrown.git && cd hashbrown
-$ make && make install
+$ make && doas make install
 ```
 
 The Makefile will create a directory called build, and place the generated object and archive files there.  The `make install` target will (by default) install the library files in the corresponding directories:
@@ -26,11 +26,11 @@ hashbrown.h --> /usr/local/include/
 libhashbrown.a --> /usr/local/lib/
 ```
 
-Also, please be aware that the `make install` target will (by default) use the `doas` command to get elevated privileges, **NOT** `sudo`.  You can change this in the Makefile however, by simply setting the `ELEV` variable to `sudo`.
+Please be aware that `make install` will require elevated privileges (as will `make uninstall`) if you are using the default install directories.
 
 You can clean the directory using `make clean`.  This will remove the build directory, as well as any object files and archive files.
 
-You can uninstall the library using `make uninstall`.  Please be aware, that this also uses the `doas` command (by default) to get elevated privileges.
+You can uninstall the library using `make uninstall`.
 
 ## Using The Library In Your Own Code
 Any code you want to use this library with, you'll have to specify it explicitly in your compiler options.  You will also have to link the library similarly to how you'd link the math library. You can use the `-I` and `-L` options to specify the location of these library files like so:
