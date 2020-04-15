@@ -8,12 +8,22 @@ hb_map *hb_newmap() {
     return map;
 }
 
+int hb_pow(int x, int n) {
+    if (n == 0) {
+        return 1;
+    } else if (n % 2 == 0) {
+        return (hb_pow(x, n / 2) * hb_pow(x, n / 2));
+    } else {
+        return (x * hb_pow(x, n / 2) * hb_pow(x, n / 2));
+    }
+}
+
 int hb_hashcode(char *str) {
     int hashcode = 0;
     int len = strlen(str);
     int i = 0;
     while (str[i] != 0) {
-        hashcode += (str[i] * pow(31, len - (i + 1)));
+        hashcode += (str[i] * hb_pow(31, len - (i + 1)));
         i++;
     }
     return hashcode;
@@ -35,7 +45,7 @@ int hb_nextprime(int len) {
 
 int hb_isprime(int n) {
     int i;
-    for (i = 2; i <= sqrt(n); i++) {
+    for (i = 2; (i * i) <= n; i++) {
         if (n % i == 0) { return 0; }
     }
     return 1;

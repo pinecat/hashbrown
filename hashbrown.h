@@ -2,8 +2,6 @@
 #define HASHBROWN_H
 
 /* imports */
-#include <stdio.h>
-#include <math.h>
 #include <stdlib.h>
 #include <string.h>
 
@@ -24,6 +22,7 @@ typedef struct hb_map {
 
 /* prototypes */
 hb_map *hb_newmap();
+int hb_pow(int x, int n);
 int hb_hashcode(char *str);
 int hb_hash(int len, char *key);
 int hb_step(char *key);
