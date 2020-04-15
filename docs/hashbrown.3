@@ -1,0 +1,198 @@
+.\" Manpage for the hashbrown library.
+.Dd April 15, 2020
+.Dt hashbrown 3
+.Os
+.Sh NAME
+.Nm hashbrown
+.Nd open addressed, double-hashing hash tables
+.Sh SYNOPSIS
+.In hashbrown.h
+.Ft hb_map *
+.Fn hb_newmap
+.Ft int
+.Fn hb_pow "int x" "int n"
+.Ft int
+.Fn hb_hashcode "char *str"
+.Ft int
+.Fn hb_hash "int len" "char *key"
+.Ft int
+.Fn hb_step "char *key"
+.Ft int
+.Fn hb_nextprime "int len"
+.Ft int
+.Fn hb_isprime "int n"
+.Ft int
+.Fn hb_haskey "hb_map *map" "char *key"
+.Ft int
+.Fn hb_put "hb_map *map" "char *key" "char *val"
+.Ft int
+.Fn hb_get "hb_map *map" "char *key" "char *val"
+.Ft void
+.Fn hb_freemap "hb_map *map"
+.Sh DESCRIPTION
+The
+.Fn hb_newmap
+subroutine initializes a new hashmap and table then returns a pointer to an
+.Fa hb_map .
+.Pp
+The
+.Fn hb_pow
+subroutine computes
+.Fa x
+to the power of
+.Fa n .
+.Pp
+The
+.Fn hb_hashcode
+subroutine computes the hashcode of the given string
+.Fa str .
+.Pp
+The
+.Fn hb_hash
+subroutine computes the hash of a
+.Fa key
+in the table or the hash of a new
+.Fa key .
+.Pp
+The
+.Fn hb_step
+subroutine computes the step size when searching for an unused bucket.
+.Pp
+The
+.Fn hb_nextprime
+subroutine multiples the current
+.Fa len
+(length) of a map's table by 2, then finds the next prime number greater than the computed value.
+.Pp
+The
+.Fn hb_isprime
+subroutine determines whether or not the given number
+.Fa n
+is prime.
+.Pp
+The
+.Fn hb_haskey
+subroutine determines whether or not a given
+.Fa key
+is in the given
+.Fa map .
+.Pp
+The
+.Fn hb_put
+subroutine puts a given
+.Fa key
+/
+.Fa val
+pair into the given
+.Fa map .
+If the
+.Fa key
+/
+.Fa val
+pair already exists, then the 
+.Fa val
+of the specified
+.Fa key
+will be updated.
+.Pp
+The
+.Fn hb_get
+subroutine gets a
+.Fa val
+from a given
+.Fa key
+stored in the given
+.Fa map .
+When calling this function, an empty buffer should be passed in for
+.Fa val
+, as this is where the value of hash table entry will be stored, if the given
+.Fa key
+is found in the table.
+.Pp
+The
+hb_freemap
+subroutine frees the memory allocated for the given
+.Fa map
+as well as the map's internal table.
+.Sh RETURN VALUES
+The
+.Fn hb_newmap
+subroutine returns a pointer to an
+.Fa hb_map .
+.Pp
+The
+.Fn hb_pow
+subroutine returns
+.Fa x
+to the power of
+.Fa n .
+.Pp
+The
+.Fn hb_hashcode
+subroutine returns a hashcode for the given string.
+.Pp
+The
+.Fn hb_hash
+subroutine returns the hash of a
+.Fa key .
+.Pp
+The
+.Fn hb_step
+subroutine returns the step size for a given
+.Fa key .
+.Pp
+The
+.Fn hb_nextprime
+subroutine returns the next prime number, larger than the current table
+.Fa len
+(length) multiplied by 2.
+.Pp
+The
+.Fn hb_isprime
+subroutine returns
+.Fa 0 
+if
+.Fa n
+is not prime, and 
+.Fa 1
+if
+.Fa n
+is prime.
+.Pp
+The
+.Fn hb_haskey
+subroutine returns 
+.Fa 0
+if the given
+.Fa key
+is not found, and
+.Fa 1
+if it is found.
+.Pp
+The
+.Fn hb_put
+subroutine returns
+.Fa 0
+if a key/value pair was updated, and
+.Fa 1
+if a key/value pair was added.
+.Pp
+The
+.Fn hb_get
+subroutine returns
+.Fa 0
+if the given
+.Fa key
+was not found, and 
+.Fa 1
+if it was found. And if the
+.Fa key
+is found, then
+.Fa val
+will be populated with the value of the hash table entry.
+.Pp
+The
+.Fn hb_freemap
+subroutine returns void.
+.Sh AUTHOR
+Rory Dudley (rory@net-c.cat)

@@ -5,6 +5,7 @@ ARCHIVE=ar
 BUILDDIR=build
 HINSTDIR=/usr/local/include
 AINSTDIR=/usr/local/lib
+MANDIR=/usr/local/man/man3
 
 all: libhashbrown.a
 
@@ -18,10 +19,13 @@ hashbrown.o: hashbrown.c hashbrown.h
 install: hashbrown.h libhashbrown.a
 	cp -f hashbrown.h $(HINSTDIR)/
 	cp -f $(BUILDDIR)/libhashbrown.a $(AINSTDIR)/
+	install -g 0 -o 0 -m 0644 docs/hashbrown.3 $(MANDIR)
+	gzip $(MANDIR)/hashbrown.3
 
 uninstall:
+	rm -f $(MANDIR)/hashbrown.3
 	rm -f $(HINSTDIR)/hashbrown.h
 	rm -f $(AINSTDIR)/libhashbrown.a
 
 clean:
-	rm -rf $(BUILDDIR) *.o *.a
+	rm -rf *.o *.a $(BUILDDIR)
