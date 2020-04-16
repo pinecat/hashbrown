@@ -170,7 +170,7 @@ int hb_haskey(hb_map *map, char *key) {
         int - 0 - If a key/value pair was updated.
         int - 1 - If a key/value pair was added.
 */
-int hb_put(hb_map *map, char *key, char *val) {
+int hb_put(hb_map *map, char *key, hb_funcptr val) {
     double load = map->size / (double) map->len;
     if (load > 0.75) {
         int new_len = hb_nextprime(map->len * 2);
@@ -184,7 +184,8 @@ int hb_put(hb_map *map, char *key, char *val) {
 
     while (temp.key[0] != 0) {
         if (!strcmp(temp.key, key)) {
-            strcpy(temp.val, val);
+            //strcpy(temp.val, val);
+            temp.val = val;
             return 0;
         } else {
             hash += step;
@@ -197,7 +198,8 @@ int hb_put(hb_map *map, char *key, char *val) {
 
     hb_node node;
     strcpy(node.key, key);
-    strcpy(node.val, val);
+    //strcpy(node.val, val);
+    node.val = val;
     map->table[hash] = node;
     map->size++;
     return 1;
@@ -221,13 +223,14 @@ int hb_put(hb_map *map, char *key, char *val) {
         int - 0 - If a key/value entry was not found.
         int - 1 - If a key/value entry was found.
 */
-int hb_get(hb_map *map, char *key, char *val) {
+int hb_get(hb_map *map, char *key, hb_funcptr *val) {
     int hash = hb_hash(map->len, key);
     int step = hb_step(key);
     hb_node temp = map->table[hash];
     while (temp.key[0] != 0) {
         if (!strcmp(temp.key, key)) {
-            strcpy(val, temp.val);
+            //strcpy(val, temp.val);
+            *val = temp.val;
             return 1;
         } else {
             hash += step;
