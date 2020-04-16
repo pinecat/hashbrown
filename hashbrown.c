@@ -165,7 +165,7 @@ int hb_haskey(hb_map *map, char *key) {
     Params:
         hb_map * - map - The map to add/update the key/value pair in.
         char * - key - The key to create the entry with.
-        char * - val - The value to create the entry with.
+        hb_funcptr - val - The value to create the entry with.
     Returns:
         int - 0 - If a key/value pair was updated.
         int - 1 - If a key/value pair was added.
@@ -217,7 +217,7 @@ int hb_put(hb_map *map, char *key, hb_funcptr val) {
     Params:
         hb_map * - map - The map to retrieve the entry from.
         char * - key - The key used to retrieve the value.
-        char * - val - A buffer which will store the value
+        hb_funcptr * - val - A function pointer which will store the value.
                         (if found) from the hash table entry.
     Returns:
         int - 0 - If a key/value entry was not found.

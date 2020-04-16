@@ -1,5 +1,5 @@
 .\" Manpage for the hashbrown library.
-.Dd April 15, 2020
+.Dd April 16, 2020
 .Dt hashbrown 3
 .Os
 .Sh NAME
@@ -24,9 +24,9 @@
 .Ft int
 .Fn hb_haskey "hb_map *map" "char *key"
 .Ft int
-.Fn hb_put "hb_map *map" "char *key" "char *val"
+.Fn hb_put "hb_map *map" "char *key" "hb_funcptr val"
 .Ft int
-.Fn hb_get "hb_map *map" "char *key" "char *val"
+.Fn hb_get "hb_map *map" "char *key" "hb_funcptr *val"
 .Ft void
 .Fn hb_freemap "hb_map *map"
 .Sh DESCRIPTION
@@ -103,11 +103,12 @@ from a given
 .Fa key
 stored in the given
 .Fa map .
-When calling this function, an empty buffer should be passed in for
+When calling this function, a function pointer should be passed in for
 .Fa val
 , as this is where the value of hash table entry will be stored, if the given
 .Fa key
-is found in the table.
+is found in the table.  You can use hb_funcptr if you know the function is void,
+otherwise just make your own function pointer with the know function return type.
 .Pp
 The
 hb_freemap
