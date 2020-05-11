@@ -5,7 +5,7 @@ ARCHIVE=ar
 BUILDDIR=build
 HINSTDIR=/usr/local/include
 AINSTDIR=/usr/local/lib
-MANDIR=/usr/local/man/man3
+MANDIR=/usr/share/man/man3
 
 all: libhashbrown.a
 
